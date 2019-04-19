@@ -2,12 +2,13 @@
 /*Exercise 1-13 print a histogram of the length of words in its input. horizontal one and vertical one*/
 #define IN 1 /*inside a word*/
 #define OUT 0 /*outside  a word*/
+#define ARR_LEN 30
 main()
 {
 	int i,j,c,state,cnt,x;
-	int nw[30];
+	int nw[ARR_LEN];
 	state  = OUT;cnt = 0;
-	for (i = 0;i < 30; i++)
+	for (i = 0;i < ARR_LEN; i++)
 		nw[i] = 0;
 	while ( (c = getchar()) != EOF)
 	{	
@@ -16,25 +17,22 @@ main()
 		  cnt++;
 		}else if ( state == IN)
 			{ state = OUT;
-			  if ( cnt < 30 )
+			  if ( cnt < ARR_LEN )
 			  nw[cnt]++;
 			  nw[0]++;
 			  cnt = 0;
 			}
 	}
-	for (i = 0;i < 30; i++)
+	for (i = 0;i < ARR_LEN; i++)
 		printf("nw[%d]:%d\n",i,nw[i]);
 
-	/*for (i = 0; i < 30;i++ )
+	/*for (i = 0; i < ARR_LEN;i++ )
 		printf("len %d,cnt %d;\n",i,nw[i]);*/
 /*horizontal display*/
-	for (i = 30;i > 0; i--)
+	for (i = ARR_LEN;i > 0; i--)
 	{
-		printf("%d",i - 1);
-		if(i-1 > 9)
-		 printf("  |");
-		else
-		 printf("   |");
+		printf("%2d",i - 1);
+		printf("  |");
 		for(j = nw[i-1]; j >= 0; j--)
 		{
 		 if(j == 0)
@@ -50,21 +48,18 @@ main()
 	}
 	printf("\n\n\n\n");
 /*vertical display*/
-	for (i = 0;i < 30; i++)
-		printf("nw[%d]:%d\n",i,nw[i]);
+	for (i = 0;i < ARR_LEN; i++)
+		printf("nw[%2d]:%4d\n",i,nw[i]);
 
 	for(i = nw[0];i >= 0; i--)
 		{	printf("\n");
-			if(i > 9)
-		 		printf("%d   -",i);
-			else
-		 		printf("%d    -",i);
+		 	printf("%4d  ",i);
 			j = 0;
-			while (j < 30)
+			while (j < ARR_LEN)
 			{	if( nw[j] >= i )
-					printf("%d ",j);
+					printf("* ");
 				else
-					printf("0 ");
+					printf("  ");
 				j++;
 			}
 		}
