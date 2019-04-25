@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAXLEN 1000  /*maximum input size */
 
-int getlines(char line[],int maxline);
+int getlines(char line[],int maxline);/*getline与C原有函数冲突，所有getline替换为getlines */
 void copy(char to[], char from[]);
 
 /* print longest input line 
