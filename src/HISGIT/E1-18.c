@@ -1,39 +1,29 @@
 #include <stdio.h>
-#define MAXLEN 20
-/*version 1.1
- write a program to remove  trailing blanks and tabs from each line of input, and to delete entirely blanks lines*/
-void removeBnkLine(char inchar[],int outputLen);
+#define MAXLEN 1000
+
+/*write a program to remove  trailing blanks and tabs from each line of input, and to delete entirely blanks lines*/
 main()
-{	int c,k;
-	c = 0;
-	char line[MAXLEN];
-	
-	while( (k = getchar()) != EOF )
-	{
-		if(k != ' ' && k != '\t')
-		{
-			line[c] = k;
-		/*	printf("line[%d]:%d\n",c,line[c]);*/
-			c++;
-		}
-		if(c == MAXLEN )
-		{
-			removeBnkLine(line,MAXLEN);
-			c = 0;
+{	int c,k,i,prenewline,nonspace;
+	nonspace = c = prenewline = 0; k =-1;
+	char blankline[MAXLEN];
+	while( (c = getchar()) != EOF ){
+		if(c == '\n'){
+				if(prenewline == 0 && nonspace == 1) putchar('\n');
+				prenewline = 1;/*false:printed a new line*/
+				k = -1;/*reset pointer*/
+				nonspace = 0;
+		}else if (c == ' ' || c == '\t'){
+			k++;
+			if(k < MAXLEN) blankline[k] = c;
+			prenewline = 0;/*false:printed a new line*/
+		}else{
+			if(k >= 0) 
+				for(i = 0; i <= k; i++) putchar(blankline[i]);
+			k = -1;/*reset pointer*/
+			nonspace = 1;
+			putchar(c);
+			prenewline = 0;/*false:printed a new line*/
 		}
 	}
-	removeBnkLine(line,c);/*output the last cycle*/
-	return 0;	
 }
 
-
-void removeBnkLine(char inchar[],int outputLen)
-{
-	int i;i = 0;
-	while(i < outputLen )
-	{	
-		if(inchar[i - 1] != '\n' || inchar[i] != '\n')
-		printf("%c",inchar[i]);
-		i++;
-	}
-}
