@@ -6,6 +6,7 @@
 //glance through the soultion, become a imitation of the solution. 
 int replaceTabNumber(int m,int n);
 int getlines(char line[],int l);
+
 int main(){
 	int c,k,l,i;
 	int tablank = 5;
