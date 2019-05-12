@@ -2,19 +2,23 @@
 #define SPACE ' '
 #define TAB '\t'
 #define MAX_BUFFER 1024
+int TabSize ;
+char line[MAX_BUFFER];
 /*write a program entab that replaces strings of blanks with the minium number of tabs and blanks to achieve the same spacing. Use the same stops as for detab. When either a tab or a single blank suffice to reach a tab stop, which
 should be given preference?*/
-int getlines(char s[],int lim);
-int calculateNumberOfSpaces(int Offset, int Ts)
+int getlines();
+int calculateNumberOfSpaces(int Offset)
 {
-	return Ts - Offset % Ts;
+	extern int TabSize;
+	return TabSize - Offset % TabSize;
 }
 int main(void)
 {
 	int c,i,l,k,blanks;
-	char line[MAX_BUFFER];
-	int TabSize = 4;
-	while( getlines(line,MAX_BUFFER) > 0){
+	extern int TabSize;
+	extern char line[];
+	TabSize = 4;
+	while( getlines() > 0){
 		for(i = 0, l = 0, blanks = 0; line[i] != '\0'; i++){
 			if(line[i] == SPACE){
 				blanks++;
@@ -23,7 +27,7 @@ int main(void)
 					//printf("blanks=%d,line[%d]:%c\n",blanks,i,'T');
 					blanks = 0;
 					l = l+TabSize;
-				}else if(calculateNumberOfSpaces(l + blanks,TabSize) == TabSize){
+				}else if(calculateNumberOfSpaces(l + blanks) == TabSize){
 					for(k = 0; k < blanks; k++){
 						putchar(SPACE);
 						//printf("blanks=%d,line[%d]:%c\n",blanks,i-blanks+k+1,'S');
@@ -55,15 +59,16 @@ int main(void)
 	return 0;
 }
 
-int getlines(char s[], int lim)
+int getlines()
 {
 	int m,n;
-	for(m = 0; m < lim -1 && (n = getchar()) != EOF && n != '\n'; m++)
-		s[m] = n;
+	extern char line[];
+	for(m = 0; m < MAX_BUFFER -1 && (n = getchar()) != EOF && n != '\n'; m++)
+		line[m] = n;
 	if(n == '\n'){
-		s[m] = n;
+		line[m] = n;
 		++m;
 	}
-	s[m] = '\0';
+	line[m] = '\0';
 	return m;
 }
