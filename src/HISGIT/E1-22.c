@@ -24,7 +24,7 @@ int main(void)
 				}
 				if(i_m == foldlength){
 					if( (i_n = blankLocationAfter(line, i_m, foldlength)) >= 0 && i_m+1+i_n < blank_i)
-									blank_i = i_m+1+i_n;
+									blank_i = i_m+1+i_n;/*nearest blank*/
 					line[blank_i] = '\n';
 					location = 0;
 					i_n = 0;
@@ -51,7 +51,7 @@ int getlines(char line[], int lim)
 	return m;
 }
 int blankLocationAfter(char s[],int cur, int length)
-{//返回后foldlength第一个空白字符的位置
+{//返回cur 位置之后foldlength第一个空白字符的位置
 	int i = 0;
 	while( i < length && s[ i+cur+1 ] != SPACE && s[ i + cur+1 ] != TAB)
 		i++;
