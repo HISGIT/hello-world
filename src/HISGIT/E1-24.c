@@ -70,6 +70,8 @@ void syn_chk(char left, char right, char l[], int length){
 			else if(l[index] == right){
 				level--;
 			//	printf("row_location[%d]:%d,column_location[%d]:%d\n",level,row_location[level],level,column_location[level]);
+				if(level < 0)
+					printf("line %d,column %d,unpaired %c\n",row_location[level], column_location[level], brace_l);
 			}
 		}
 	}
