@@ -30,14 +30,27 @@ int main(void){
                 if(line[k-2] == '*' && line[k-1] == '/' && COMMENT == T)
                     COMMENT = F;
             }else {
-               if(line[k-1] != '\'' || line[k-1] != '"'){ 
+               if(QUOTED == F){ 
                     if(line[k] == '/' && line[k + 1] == '/')
                         COMMENT = TT;
                     if(line[k] == '/' && line[k + 1] == '*')
                         COMMENT = T;
+                    if(line[k] == '"')
+                        QUOTED = TT;
+                    if(line[k] == '\'')
+                        QUOTED = T;
+               }else{
+                   if(line[k] == '"' && QUOTED == TT)
+                       QUOTED = F;
+                   if(line[k] == '\'' && QUOTED == T){
+                       if(line[k-2] == '\\' && line[k-3] == '\'')
+                           QUOTED = F;
+                       else if(line[k-2] == '\'' && line[k+1] != '\'')
+                           QUOTED = F;
+                   }
                }
             }
-            if(COMMENT == F)
+            if(COMMENT == F )
                 printf("%c",line[k]);
         }
     }
