@@ -32,15 +32,15 @@ int htoi(char str[]){
 }
 
 int main(void){
-    char str[LENGTH];
-    while(1){
+    char str[LENGTH];str[0] = '0';
+    while(str[0] != '\0'){
         getlines(str,LENGTH);
         int out_decimal = htoi(str);
         if(out_decimal >= 0)
-            printf("hexadecimal formate: %sdecimal form: %d\n", str,
+            printf("hexadecimal form: %sdecimal form: %d\n", str,
             out_decimal);
         else
-            printf("bad formate");
+            printf("bad form\n");
     }
     return 0;
 }
