@@ -10,7 +10,7 @@ void itohex(int n, char s[]);
 int main(){
     long int quotient, remainder, b, sign;
     quotient = 52242084;
-    b = 32;
+    b = 100;
     printf("%ld(base 10)\n",quotient);
     if( quotient < 0){
         sign = -1;
