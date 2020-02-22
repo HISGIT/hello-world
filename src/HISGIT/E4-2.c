@@ -3,12 +3,14 @@
  where a floating-point number may be followed by e or E and an optionally 
  signed exponent. */
 #include <stdio.h>
-#include <ctype,h>
+#include <ctype.h>
+#include <math.h>
 #define MAXLEN 1000
 
 float atof(char s[]);
-void main(){
-
+int main(){
+    char s[] = "     1414.23e-6";
+    printf("%f",atof(s));
 }
 
 float atof(char s[]){
@@ -17,7 +19,7 @@ float atof(char s[]){
     char e[MAXLEN];
     for(i = 0; isspace(s[i]); i++)
         ;
-    sign = (s[i] =='-1')? -1 :1 ;
+    sign = (s[i] == '-')? -1 :1 ;
     if(s[i] == '-' || s[i] == '+')
         i++;
     for(val = 0.0; isdigit(s[i]); i++)
@@ -36,7 +38,7 @@ float atof(char s[]){
     for(int j = 0; isdigit(s[i]) && j < MAXLEN; j++, i++){
         e[j] = s[i];
     }
-    float epower = 10.0 ^ atoi(e);
+    float epower = pow(10.0, atoi(e));
     power = (psign == 1) ? (power/epower) : (power * epower);
     return sign * val / power;
 }
