@@ -1,14 +1,13 @@
 #include <stdio.h> 
 #define MAXVAL 100 /* maxium depth of val stack */
-
-int sp = 0; /* next free stack position */
-double val[MAXVAL]; /* value stack */
+int sp = 0;
+double val[MAXVAL];
 
 /* push: push f onto value stack */
 void push(double f){
-    if(sp < MAXVAL )
+    if(sp < MAXVAL ){
         val[sp++] = f;
-    else
+    }else
         printf("error: stack full, can't push %g\n", f);
 }
 
