@@ -8,9 +8,8 @@ void push(double);
 double pop(void);
 
 /*reverse polish calculator 
- Given the basic framework, it's straightforward to ex
- -tend the calculator. Add the modulus (%) operator and
- provision for negative numbers. */
+ add commands to print the top element of the stack without popping, to duplate 
+ it, and swap the top two elements. Add a command to clear the stakc. */
 int main(){
     int type;
     double op2, op1;
@@ -44,6 +43,21 @@ int main(){
                     push(op1 - op2 * (long)(op1 / op2));
                 else
                     printf("error: zero divisor\n");
+                break;
+            case 't':   /* print top element without popping*/
+                op2 = pop();
+                push(op2);
+                printf("top element:%f\n%", op2);
+                break;
+            case 'c':
+                while(pop() != 0.0)
+                    ;
+                break;
+            case 's':
+                op2 = pop();
+                op1 = pop();
+                push(op2);
+                push(op1);
                 break;
             case '\n':
                 printf("\t%.8g\n",pop());
